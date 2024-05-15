@@ -1,4 +1,10 @@
-' Matlab codes for designing Spur / Helical Gears in Metric systems   line 2 - 300 '
+' Matlab codes for designing Spur / Helical Gears in Metric systems  ------> line 8 - 306 '
+' Matlab codes for designing Shafts in Metric systems  ------> line 308 - 486 '
+' Matlab codes for designing Bearings   ------> line 488 - 677 '
+' Matlab codes for designing Belts    ------> line 679 - 1083 '
+' Matlab codes for designing Rectangular keys    ------> line 1085 - 1105 '
+
+-------------------------------------------------------------------------------------------------------------
 clc;
 clear all;
 spur=input('if spur enter 1 if helical enter 2  ');
@@ -298,3 +304,802 @@ sHP=(((ScP*ZNP*Zw)/(Yteta*Yz))/sigmaCP)-0.1;
 sHG=(((ScG*ZNG*Zw)/(Yteta*Yz))/sigmaCG)-0.1;
 F={'sFP',sFP;'sFG',sFG;'sHP',sHP;'sHG',sHG;'sigmaP',sigmaP;'sigmaG',sigmaG;'sigmaCP',sigmaCP;'sigmaCG',sigmaCG;'Wt',Wt;'KO',ko;'Kv',Kv;'KsP',KsP;'KsG',KsG;'KH',Kh;'ZR',ZR;'ZI',ZI;'KB',KB;'YJP',YJP;'YJG',YJG;'StP',StP;'StG',StG;'ScP',ScP;'ScG',ScG;'Zw',Zw;'Yz',Yz;'Yteta',Yteta;'YNP',YNP;'YNG',YNG;'ZNP',ZNP;'ZNG',ZNG};
 disp(F);
+-------------------------------------------------------------------------------------------------------------
+clc;
+clear all
+close all
+Sut=input('Sut_MPa   =');
+Sy=input('Sy_MPa   =');
+charkhesh=input('shaft charkhan tu por=1_ tukhali ya gheyre charkhan=2   =');
+niru=input('bar tarkibi ya gheyre mehvari gheyre tarkibi=1_fght mehvari=2   =');
+K1=input('sangzade=1_MashinkariYaSardkeshide=2_Garmnavardide=3_Ahangari=4   =');
+K2=input('khamesh=1_mehvar=2_pichesh=3_tarkib=4');
+K3=input('etemadpaziri be sadom');
+dama=input('agar damaye kari mohit bud=1_ dargheyre in surat dama ra vared konid C');
+Kf=input('Kf avamele motefareghe ra vared konid ke mamulan yeke');
+model=input('Tahlil=1_Tarahi=2    =');
+Fa=input('Fa niruye mehvari amplitude be nioton');
+Fm=input('Fm niruye mehvari nioton');
+Ta=input('Ta pichesh amplitude be Niotin');
+Tm=input('Tm Nioton');
+Ma=input('Ma gashtavarae amplitude N.m');
+Mm=input('Mm be N.m');
+if dama==1
+    Kd=1;
+else
+    Kd=0.9877+(0.6507*10^(-3)*dama)-(0.3414*10^(-5)*dama^2)+(0.5621*10^(-8)*dama^3)-(6.246*10^(-12)*dama^4);
+end
+FF=Kd*Sut;
+Sut=FF;
+if Sut<=1400
+        SprimE=0.5*Sut;
+else
+        SprimE=700;
+end
+aa1=0.246-(3.08*10^(-3)*(Sut/6.89))+(1.51*10^(-5)*(Sut/6.89)^2)-(2.67*10^(-8)*(Sut/6.89)^3);
+aa=aa1*sqrt(25.4);
+aas1=0.190-(2.51*10^(-3)*(Sut/6.89))+(1.35*10^(-5)*(Sut/6.89)^2)-(2.67*10^(-8)*(Sut/6.89)^3);
+aas=aas1*sqrt(25.4);
+if K1==1
+       a=1.58;
+       b=-0.085;
+elseif K1==2
+       a=4.51;
+       b=-0.265;
+elseif K1==3
+       a=57.7;
+       b=-0.718;
+else
+      a=272;
+      b=-0.995;
+end
+Ka=a*(Sut^b);
+if K3==0.5
+    Ke=1;
+elseif K3==0.9
+    Ke=0.897;
+elseif K3==0.95
+    Ke=0.868;
+elseif K3==0.99
+    Ke=0.814;
+elseif K3==0.999
+    Ke=0.753;
+elseif K3==0.9999
+    Ke=0.703;
+elseif K3==0.99999
+    Ke=0.659;
+elseif K3==0.999999
+    Ke=0.630;
+end
+if K2==1
+        Kc=1;
+elseif K2==2
+        Kc=0.85;
+elseif K2==3
+        Kc=0.59;
+else
+        Kc=1;
+end
+if model==1
+    d=input('diameter mm');
+    if niru==2
+        Kb=1;
+    else
+        if charkhesh==1
+            if (d>=2.79)&&(d<=51)
+                Kb=1.24*(d^(-0.107));
+            else
+                Kb=1.51*(d)^(-0.157);
+            end
+        else
+            de=0.37*d;
+            if (de>=2.79)&&(de<=51)
+                Kb=1.24*(de^(-0.107));
+            else
+                Kb=1.51*(de)^(-0.157);
+            end
+        end
+    end
+    KtA=input('tamarkoz taneshe mehvari');
+    Ktb=input('tamarkoz taneshe khameshi');
+    Kts=input('tamarkoz taneshe picheshi');
+    rr=input('agar andaze fillet ra darim =1 dar gheyre in surat =2');
+    if rr==1
+    r=input('fillet radius mm');
+    Kfb=1+((Ktb-1)/(1+(aa/sqrt(r))));
+    KfA=1+((KtA-1)/(1+(aa/sqrt(r))));
+    Kfs=1+((Kts-1)/(1+(aas/sqrt(r))));
+    else
+        Kfb=Ktb;
+        KfA=KtA;
+        Kfs=Kts;
+    end
+    Se=Ka*Kb*Kc*Ke*Kf*SprimE;
+    n(1,1)=1/((((((32*Kfb*Ma)/(pi*(d*10^(-3))^3)+(4*KfA*Fa)/(0.85*pi*(d*10^(-3))^2))^2+3*((16*Kfs*Ta)/(pi*(d*10^(-3))^3))^2)^0.5)/(Se*10^6))+(((((32*Kfb*Mm)/(pi*(d*10^(-3))^3)+(4*KfA*Fm)/(pi*(d*10^(-3))^2))^2+3*((16*Kfs*Tm)/(pi*(d*10^(-3))^3))^2)^0.5)/(Sut*10^6)));
+    n(1,2)=(Sy*10^6)/((((32*Kfb*(Mm+Ma))/(pi*(d*10^(-3))^3)+(((4*KfA*(Fa/0.85+Fm))/(pi*(d*10^(-3))^2))))^2+(3*((16*Kfs*(Tm+Ta))/(pi*(d*10^(-3))^3))^2))^0.5);
+else
+    KK=input('gorde tiz r/d=0.02=1_ gorde gerd r/d=0.1 =2_ jakhar ferez angoshti r/d=0.02 =3_ jakhar KafGerd=4_shiar khar fanari=5_ bedune tamarkoz tanesh=6   =');
+    n(1,1)=input('zaribe etminane khastegi');
+    Kb=0.85;
+    if KK==1
+        KtA=3;
+        Ktb=2.7;
+        Kts=2.2;
+    elseif KK==2
+        KtA=1.9;
+        Ktb=1.7;
+        Kts=1.5;
+    elseif KK==3
+        KtA=3;
+        Ktb=2.14;
+        Kts=3;
+    elseif KK==4
+        KtA=2;
+        Kts=2;
+        Ktb=1.7;
+    elseif KK==5
+        KtA=5;
+        Ktb=5;
+        Kts=3;
+    else
+        KtA=1;
+        Ktb=1;
+        Kts=1;
+    end
+    q=0.9;
+    qs=0.8;
+    Kfb=1+(q*(Ktb-1));
+    Kfs=1+(qs*(Kts-1));
+    KfA=1+(q*(KtA-1));
+    syms d HHHH
+    for I=1:1:25
+    Se=Ka*Kb*Kc*Ke*Kf*SprimE;
+    HHHH=((((((((32*Kfb*Ma)/(pi*(d)^3)+(4*KfA*Fa)/(0.85*pi*(d)^2))^2+3*((16*Kfs*Ta)/(pi*(d)^3))^2)^0.5))*n(1,1))^2)/((Se*10^6)^2)+((((((32*Kfb*Mm)/(pi*(d)^3)+(4*KfA*Fm)/(pi*(d)^2))^2+3*((16*Kfs*Tm)/(pi*(d)^3))^2)^0.5)*n(1,1))^2)/((Sy*10^6)^2))-1;
+    ddd=double(solve(HHHH==0,d));
+    for LMN=1:1:6
+        LMJ=isreal(ddd(LMN,1));
+        if LMJ==1 && ddd(LMN,1)>0
+           dd=ddd(LMN,1);
+            break 
+        end
+    end
+         if charkhesh==1
+            if (dd>=0.00279)&&(dd<=0.051)
+                Kb=1.24*((dd*10^3)^(-0.107));
+           else
+                Kb=1.51*(dd*10^3)^(-0.157);
+            end
+        else
+            de=0.37*dd;
+            if (de>=0.00279)&&(de<=0.051)
+                Kb=1.24*((de*10^3)^(-0.107));
+            else
+                Kb=1.51*(de*10^3)^(-0.157);
+            end
+         end
+    end
+    n(1,2)=(Sy*10^6)/((((32*Kfb*(Mm+Ma))/(pi*(dd)^3)+(((4*KfA*(Fa/0.85+Fm))/(pi*(dd)^2))))^2+(3*((16*Kfs*(Tm+Ta))/(pi*(dd)^3))^2))^0.5);
+    HHH={'d  meter',dd};
+    disp(HHH);
+end
+NN={'n khastegi',n(1,1);'n estatic',n(1,2)};
+disp(NN);
+-------------------------------------------------------------------------------------------------------------
+clc;
+clear all;
+Q=input('deep groove ball bearing=1_roller bearing=2');
+n=input('tedade dor shaft rpm');
+h=input('zamane karkarde yataghan hours');
+R=input('reliability be sadom');
+af=input('zarib ezafe bar ya hamun safety factor');
+L=60*h*n;
+Xd=L/(1e6);
+if Q==2
+    Fd=input('Fd be KN');
+    C10=af*Fd*(Xd/(0.02+(4.439*(1-R)^(1/1.483))))^(3/10);
+else
+    E=input('halghe dakheli micharkhad=1_halghe khareji micharkhad=2');
+    Fr=input('Fr be KN');
+    Fa=input('Fa be KN');
+    C0=input('C0 guess kN');
+    %c10 ha be tartib SKF %
+    C(1,1)=0.54;
+    C(2,1)=0.624;
+    C(3,1)=0.806;
+    C(4,1)=0.936;
+    C(5,1)=1.11;
+    C(6,1)=1.14;
+    C(7,1)=2.34;
+    C(8,1)=3.45;
+    C(9,1)=3.9;
+    C(10,1)=4.75;
+    C(11,1)=5.07;
+    C(12,1)=5.4;
+    C(13,1)=6.89;
+    C(14,1)=7.28;
+    C(15,1)=8.52;
+    C(16,1)=9.75;
+    C(17,1)=10.1;
+    C(18,1)=11.4;
+    C(19,1)=11.9;
+    C(20,1)=12.7;
+    C(21,1)=13.5;
+    C(22,1)=14;
+    C(23,1)=15.9;
+    C(24,1)=16.8;
+    C(25,1)=18.2;
+    C(26,1)=22.9;
+    C(27,1)=23.4;
+    C(28,1)=25.1;
+    C(29,1)=26;
+    C(30,1)=27;
+    C(31,1)=28.1;
+    C(32,1)=29.6;
+    C(33,1)=32.5;
+    C(34,1)=33.2;
+    C(35,1)=35.1;
+    C(36,1)=37.1;
+    C(37,1)=41;
+    C(38,1)=42.3;
+    C(39,1)=52.7;
+    C(40,1)=55.3;
+    C(41,1)=61.8;
+    C(42,1)=65;
+    C(43,1)=71.5;
+    C(44,1)=74.1;
+    C(45,1)=76.1;
+    C(46,1)=81.9;
+    C(47,1)=87.1;
+    C(48,1)=97.5;
+    C(49,1)=99.5;
+    C(50,1)=104;
+    C(51,1)=108;
+    C(52,1)=111;
+    C(53,1)=119;
+    C(54,1)=127;
+    C(55,1)=130;
+    C(56,1)=143;
+    C(57,1)=151; 
+    C(58,1)=159; 
+    C(59,1)=165; 
+    C(60,1)=186;
+    C(61,1)=203;
+    C(62,1)=208;
+    C(63,1)=229;
+    C(64,1)=238;
+    C(65,1)=251;
+    C(66,1)=255;
+    C(67,1)=270;
+    C(68,1)=296; 
+    C(69,1)=302; 
+    C(70,1)=351; 
+    %C0 haye motenazer%
+    C(1,2)=0.18;
+    C(2,2)=0.18;
+    C(3,2)=0.28;
+    C(4,2)=0.29;
+    C(5,2)=0.38;
+    C(6,2)=0.38;
+    C(7,2)=0.95;
+    C(8,2)=1.37;
+    C(9,2)=1.66;
+    C(10,2)=1.96;
+    C(11,2)=2.36;
+    C(12,2)=2.36;
+    C(13,2)=3.1;
+    C(14,2)=3.1;
+    C(15,2)=3.4;
+    C(16,2)=4.15;
+    C(17,2)=4.15;
+    C(18,2)=5.4;
+    C(19,2)=5.4;
+    C(20,2)=6.55;
+    C(21,2)=6.55;
+    C(22,2)=7.65;
+    C(23,2)=7.8;
+    C(24,2)=7.8;
+    C(25,2)=9;
+    C(26,2)=10.8;
+    C(27,2)=11.6;
+    C(28,2)=13.7;
+    C(29,2)=13.4;
+    C(30,2)=15.3;
+    C(31,2)=16;
+    C(32,2)=16;
+    C(33,2)=17.3;
+    C(34,2)=19;
+    C(35,2)=21.6;
+    C(36,2)=23.2;
+    C(37,2)=24;
+    C(38,2)=24;
+    C(39,2)=31.5;
+    C(40,2)=31.5;
+    C(41,2)=38;
+    C(42,2)=38;
+    C(43,2)=45;
+    C(44,2)=45;
+    C(45,2)=45;
+    C(46,2)=52;
+    C(47,2)=52;
+    C(48,2)=60;
+    C(49,2)=62;
+    C(50,2)=68;
+    C(51,2)=69.5;
+    C(52,2)=68;
+    C(53,2)=76.5;
+    C(54,2)=93;
+    C(55,2)=86.5;
+    C(56,2)=104;
+    C(57,2)=118; 
+    C(58,2)=118; 
+    C(59,2)=150; 
+    C(60,2)=150;
+    C(61,2)=180;
+    C(62,2)=186;
+    C(63,2)=216;
+    C(64,2)=310;
+    C(65,2)=245;
+    C(66,2)=280;
+    C(67,2)=310;
+    C(68,2)=365; 
+    C(69,2)=405; 
+    C(70,2)=405; 
+    if E==1
+        V=1;
+    else
+        V=1.2;
+    end
+    for I=1:1:5000
+        x=Fa/C0;
+    if x<0.014
+       e=0.019;
+    else
+    e=- 0.9796599351*x^2 + 0.9676804793*x + 0.19748856;
+    end
+    if Fa/(V*Fr)<=e
+        X1=1;
+        Y1=0;
+    else
+        X1=0.56;
+        Y1=7.472201716*x^2 - 6.05989608*x + 2.140081506;
+    end 
+    Fe=X1*V*Fr+Y1*Fa;
+    C10=af*Fe*(Xd/(0.02+(4.439*(1-R)^(1/1.483))))^(1/3);
+    for J=1:1:60
+        if C10<=C(J,1)
+            C0=C(J,2);
+            break
+        end
+    end
+    end
+end
+    NN={'C10 KN',C10};
+    disp(NN);
+-------------------------------------------------------------------------------------------------------------
+clc;
+clear all
+problem=input('Flatbelt=1_Vbelt=2_RollerChains=3   =');
+shock=input('bedune shock=1_light=2_medium=3_heavy=4   =');
+gashtavar=input('gashtavar addi=1_gashtavar bala=2   =');
+% overload %
+if shock==1
+    if gashtavar==1
+        Ks=1;
+    else
+        Ks=1.25;
+    end
+elseif shock==2
+    if gashtavar==1
+        Ks=1.25;
+    else
+        Ks=1.35;
+    end
+elseif shock==3 
+    if gashtavar==1
+        Ks=1.35;
+    else
+        Ks=1.55;
+    end
+else
+    if gashtavar==1
+        Ks=1.45;
+    else
+        Ks=1.75;
+    end
+end
+%------%
+%--------- flat belt ----------%
+if problem==1
+    no1=input('tahlil=1_tarahi=2   =');
+    no=input('mamuli=1_zarbdari=2   =');
+    if no1==1
+    C=input('central distance_in   =');
+    n=input('small pulley velocity rpm   =');
+    Hnominal=input('tavan hp   =');
+    d=input('small pulley diameter in   =');
+    D=input('bigger pulley diameter in   =');
+    b=input('arze pulley in   =');
+    if no==1
+        tetad=pi-2*asin((D-d)/(2*C));
+        tetaD=pi+2*asin((D-d)/(2*C));
+        L=(4*C^2-(D-d)^2)^0.5+0.5*(D*tetaD+d*tetad);
+        phi=tetad;
+    else
+        teta=pi+2*asin((D-d)/(2*C));
+        L=(4*C^2-(D-d)^2)^0.5+0.5*((D+d)*teta);
+        phi=teta;
+    end
+    V=(pi*d*n)/12;
+    landa=input('vazne makhsus az jadval 17-2   =');
+    t=input('zekhamat tasme _jadval 17-2   =');
+    w=12*landa*b*t;
+    Fa=input('Fa az jadval 17-2   =');
+    f=input('estekak f az jadval 17-2   =');
+    Fc=(w/32.17)*(V/60)^2;
+    nd=input('zarib etminan ke mamuln 1.1   =');
+    T=(63025*Hnominal*Ks*nd)/n;
+    Cv=input('Cv  agar charmi bud shekle 17-9 dargheyre in surat =1   =');
+    Cp=input('Cp az jadval 17-4   =');
+    F1a=b*Fa*Cp*Cv;
+    F2=F1a-((2*T)/d);
+    Fi=(F1a+F2)/2-Fc;
+    fprim=(log((F1a-Fc)/(F2-Fc)))*(1/phi);
+    nn(1,1)=fprim;
+    nn(1,2)=f;
+    NN={'fprim',nn(1,1);'f',nn(1,2)};
+    disp(NN);
+    disp('bayad fprim<f');
+    else
+        C=input('central distance_in');
+        nd=input('zarib etminan ke mamuln 1.1   =');
+        Hnominal=input('tavan hp   =');
+        n=input('small pulley velocity rpm   =');
+        ratio=input('nesbat tabdil(bozorg be kuchik)   =');
+        d=input('small pulley diameter hadsi in   =');
+        D=ratio*d;
+        t=input('belt az jadval 17-2 hads bezan va zekhamatesh bekhun in va min ghotr pulley kuchike ro check kon ba d hadsi   =');
+        Cv=input('Cv  agar charmi bud shekle 17-9 dargheyre in surat =1   =');
+        landa=input('vazne makhsus az jadval 17-2   =');
+        f=input('estekak f az jadval 17-2   =');
+        Fa=input('Fa az jadval 17-2   =');
+        Cp=input('Cp az jadval 17-4   =');
+    if no==1
+        tetad=pi-2*asin((D-d)/(2*C));
+        tetaD=pi+2*asin((D-d)/(2*C));
+        L=(4*C^2-(D-d)^2)^0.5+0.5*(D*tetaD+d*tetad);
+        phi=tetad;
+    else
+        teta=pi+2*asin((D-d)/(2*C));
+        L=(4*C^2-(D-d)^2)^0.5+0.5*((D+d)*teta);
+        phi=teta;
+    end
+    Hd=Hnominal*Ks*nd;
+    T=(63025*Hd)/n;
+    V=(pi*d*n)/12;
+    syms b
+    HHH=((b*Fa*Cp*Cv)-((12*landa*b*t*V^2)/(32.17*60^2)))/((b*Fa*Cp*Cv-(2*T)/d)-((12*landa*b*t*V^2)/(32.17*60^2)))-exp(phi*f);
+    HHHH=solve(HHH==0,b);
+    nn(1,1)=double(HHHH);
+    NN={'b in',nn(1,1)};
+    disp(NN);
+    ezafe=input('cheghadr mikhay be b ezafe koni  in  =');
+    b=double(HHHH)+ezafe;
+    w=12*landa*b*t;
+    Fc=(w/32.17)*(V/60)^2;
+    F1a=b*Fa*Cp*Cv;
+    F2=F1a-((2*T)/d);
+    Fi=(F1a+F2)/2-Fc;
+    Ht=((F1a-F2)*V)/33000;
+    fprim=(log((F1a-Fc)/(F2-Fc)))*(1/phi);
+    nn(1,1)=double(fprim);
+    nn(1,2)=double(f);
+    nn(1,3)=double(Ht);
+    NN={'fprim',nn(1,1);'f',nn(1,2);'H nominal jadid hp',nn(1,3)};
+    disp(NN);
+    disp('bayad fprim<f');
+    end
+    %-----------------%
+    %----      V-Belts      ------%
+elseif problem==2
+    no1=input('tahlil=1_tarahi=2  =');
+    if no1==1
+        no=input('noe tasme A=1_B=2_C=3_D=4_E=5  =');
+        n=input('sorat pulley kuchike rpm  =');
+        Hnominal=input('tavan hp  =');
+        if no==1
+            Lc=1.3;
+            Kb=220;
+            Kc=0.561;
+            a=0.5;
+            b=11/32;
+        elseif no==2
+            Lc=1.8;
+            Kb=576;
+            Kc=0.965;
+            a=21/32;
+            b=7/16;
+        elseif no==3
+            Lc=2.9;
+            Kb=1600;
+            Kc=1.716;
+            a=7/8;
+            b=17/32;
+        elseif no==4
+            Lc=3.3;
+            Kb=5680;
+            Kc=3.498;
+            a=1.25;
+            b=3/4;
+        else 
+            Lc=4.5;
+            Kb=10850;
+            Kc=5.041;
+            a=1.5;
+            b=1;
+        end
+        d=input('small pulley diameter in =');
+        D=input('bigger pulley diameter in =');
+        nd=input('zarib etminan ke mamuln 1.1 =');
+        which=input('L ro darim=1_C ro darim=2  =');
+        if which==1
+            L=input('L in  =');
+            Lp=L+Lc;
+            C=0.25*((Lp-(pi/2)*(D+d))+sqrt((Lp-(pi/2)*(D+d))^2-2*(D-d)^2));
+        else
+            C=input('C in =');
+            Lp=2*C+pi*(D+d)/2+((D-d)^2)/(4*C);
+            L=Lp-Lc;
+        end
+        V=(pi*d*n)/12;
+        tetad=pi-2*asin((D-d)/(2*C));
+        tetaD=pi+2*asin((D-d)/(2*C));
+        phi=tetad;
+        nnn(1,1)=phi*180/pi;
+        nnn(1,2)=V;
+        NNN={'V ft/min',nnn(1,2);'tetad  daraje',nnn(1,1)};
+        disp(NNN);
+        Htab=input('Htab hp az jadval 17-12 ba estefade az sorat va d  =');
+        K1=input('K1 az jadval 17-13 ba estefade az zavie  =');
+        K2=input('K2 az jadval 17-14 ba estefade az L  =');
+        Ha=K1*K2*Htab;
+        Hd=Hnominal*Ks*nd;
+        Nb=ceil(Hd/Ha);
+        Fc=Kc*(V/1000)^2;
+        T=(63025*Hd/Nb)/(n*d/2);
+        F1=Fc+((T*exp(0.5123*phi))/(exp(0.5123*phi)-1));
+        F2=F1-T;
+        Fi=(F1+F2)/2-Fc;
+        nfs=(Ha*Nb)/(Hnominal*Ks);
+        T1=F1+Kb/d;
+        T2=F1+Kb/D;
+        K=input('K az jadval17-17 mamuln dar baze 10^8ta 10^9  =');
+        bb=input('b az jadval17-17 mamuln dar baze 10^8ta 10^9  =');
+        Np=((K/T1)^(-bb)+(K/T2)^(-bb))^(-1);
+        if Np>10^9
+            Np=10^9;
+            t=(Np*Lp)/(720*V);
+        else
+            t=(Np*Lp)/(720*V);
+        end
+        nn(1,1)=t;
+        nn(1,2)=nfs;
+        nn(1,3)=Ha;
+        nn(1,4)=Hd;
+        nn(1,5)=Nb;
+        NN={'t hours',nn(1,1);'nfs',nn(1,2);'Ha   hp',nn(1,3);'Hd  hp',nn(1,4);'Nb',nn(1,5)};
+        disp(NN);
+    else
+        n=input('sorat pulley kuchike rpm  =');
+        Hnominal=input('tavan hp  =');
+        C=input('C in =');
+        ratio=input('nesbat tabdil(bozorg be kuchik)   =');
+        nd=input('zarib etminan ke mamuln 1.1 =');
+        no=input('noe tasme  hads bezan A=1_B=2_C=3_D=4_E=5  =');
+        d=input('small pulley diameter hadsi in va min eshi ba jadval 17-9 check kon  =');
+        D=ratio*d;
+        if no==1
+            Lc=1.3;
+            Kb=220;
+            Kc=0.561;
+            a=0.5;
+            b=11/32;
+        elseif no==2
+            Lc=1.8;
+            Kb=576;
+            Kc=0.965;
+            a=21/32;
+            b=7/16;
+        elseif no==3
+            Lc=2.9;
+            Kb=1600;
+            Kc=1.716;
+            a=7/8;
+            b=17/32;
+        elseif no==4
+            Lc=3.3;
+            Kb=5680;
+            Kc=3.498;
+            a=1.25;
+            b=3/4;
+        else 
+            Lc=4.5;
+            Kb=10850;
+            Kc=5.041;
+            a=1.5;
+            b=1;
+        end
+        Lp=2*C+pi*(D+d)/2+((D-d)^2)/(4*C);
+        L=Lp-Lc;
+        nnn(1,1)=L;
+        NNN={'L in',nnn(1,1)};
+        disp(NNN);
+        L=input('nazdik tarin adad be L inch ba estefade az jadvale 17-10  =');
+        V=(pi*d*n)/12;
+        tetad=pi-2*asin((D-d)/(2*C));
+        tetaD=pi+2*asin((D-d)/(2*C));
+        phi=tetad;
+        nnnn(1,1)=phi*180/pi;
+        nnnn(1,2)=V;
+        NNNN={'V ft/min',nnnn(1,2);'tetad  daraje',nnnn(1,1)};
+        disp(NNNN);
+        Htab=input('Htab hp az jadval 17-12 ba estefade az sorat va d  =');
+        K1=input('K1 az jadval 17-13 ba estefade az zavie  =');
+        K2=input('K2 az jadval 17-14 ba estefade az L  =');
+        Ha=K1*K2*Htab;
+        Hd=Hnominal*Ks*nd;
+        Nb=ceil(Hd/Ha);
+        Fc=Kc*(V/1000)^2;
+        T=(63025*Hd/Nb)/(n*d/2);
+        F1=Fc+((T*exp(0.5123*phi))/(exp(0.5123*phi)-1));
+        F2=F1-T;
+        Fi=(F1+F2)/2-Fc;
+        nfs=(Ha*Nb)/(Hnominal*Ks);
+        T1=F1+Kb/d;
+        T2=F1+Kb/D;
+        K=input('K az jadval17-17 mamuln dar baze 10^8ta 10^9  =');
+        bb=input('b az jadval17-17 mamuln dar baze 10^8ta 10^9  =');
+        Np=((K/T1)^(-bb)+(K/T2)^(-bb))^(-1);
+        if Np>10^9
+            Np=10^9;
+            t=(Np*Lp)/(720*V);
+        else
+            t=(Np*Lp)/(720*V);
+        end
+        nn(1,1)=t;
+        nn(1,2)=nfs;
+        nn(1,3)=a;
+        nn(1,4)=b;
+        nn(1,5)=Ha;
+        nn(1,6)=Hd;
+        nn(1,7)=Nb;
+        NN={'t hours',nn(1,1);'nfs',nn(1,2);'a tasme in',nn(1,3);'b tasme in',nn(1,4);'Ha  hp',nn(1,5);'Hd  hp',nn(1,6);'Nb',nn(1,7)};
+        disp(NN);
+    end
+    %----------------%
+    % --------Roller chain-----------%
+else
+    no1=input('tahlil=1_tarahi=2  =');
+    if no1==1
+        no=input('nomre zanjir  =');
+        tedad=input('tedad reshte 1=1  2=2 3=3 4=4 5=5 6=6 8=8   = ');
+        n=input('sorat charkh zanjir kuchike rpm  =');
+        nd=input('zarib etminan ke mamuln 1.5  =');
+        Hnominal=input('tavan hp  =');
+        N1=input('tedad dandane charkh zanir kuchak =');
+        N2=input('tedad dandane charkh zanir bozorg =');
+        which=input('L ro darim=1_C ro darim=2   =');
+        if which==1
+            L=input('toole halghe zanjir L inch   =');
+            p=input('gam zanjir inch    =');
+            A=(N1+N2)/2-L/p;
+            C=(p/4)*(-A+sqrt(A^2-8*((N2-N1)/(2*pi))^2));
+        else
+            C=input('C inch  =');
+            p=input('gam zanjir inch    =');
+            L=2*C+(p*(N1+N2))/2+(p^2*(N2-N1)^2)/(4*pi^2*C);
+            A=(N1+N2)/2-L/p;
+        end
+        if tedad==1
+            K2=1;
+        elseif tedad==2
+            K2=1.7;
+        elseif tedad==3
+            K2=2.5;
+        elseif tedad==4
+            K2=3.3;
+        elseif tedad==5
+            K2=3.9;
+        elseif tedad==6
+            K2=4.6;
+        else
+            K2=6;
+        end
+        KKK=input('ghable extermum=1_ bade etermum=2    =');
+        if KKK==1
+            K1=(N1/17)^1.08;
+        else
+            K1=(N1/17)^1.5;
+        end
+        Htab=input(' Htab az jadval 17-20 ba estefade az nomre janjir va sorat  hp');
+        Ha=K1*K2*Htab;
+        Hd=Hnominal*Ks*nd;
+        nn(1,1)=Ha;
+        nn(1,2)=Hd;
+        nn(1,3)=L;
+        nn(1,4)=C;
+        NN={'Ha hp',nn(1,1);'Hd hp',nn(1,2);'L  inch',nn(1,3);'C inch',nn(1,4)};
+        disp(NN);
+        disp('bayad Ha>Hd');
+    else
+        n=input('sorat charkh zanjir kuchike rpm  =');
+        nd=input('zarib etminan ke mamuln 1.5  =');
+        Hnominal=input('tavan hp  =');
+        C=input('C inch  =');
+        ratio=input('nesbat tabdil bozorg be kuchik   =');
+        N1=input('tedad dandane hadsi charkh zanjir kuchak az jadval 17-1 =');
+        N2=ratio*N1;
+        KKK=input('ghable extermum=1_ bade etermum=2    =');
+        if KKK==1
+            K1=(N1/17)^1.08;
+        else
+            K1=(N1/17)^1.5;
+        end
+        tedad=input('tedad reshte hadsi 1=1  2=2 3=3 4=4 5=5 6=6 8=8   = ');
+        if tedad==1
+            K2=1;
+        elseif tedad==2
+            K2=1.7;
+        elseif tedad==3
+            K2=2.5;
+        elseif tedad==4
+            K2=3.3;
+        elseif tedad==5
+            K2=3.9;
+        elseif tedad==6
+            K2=4.6;
+        else
+            K2=6;
+        end
+        Htab=(nd*Ks*Hnominal)/(K1*K2);
+        nnn(1,1)=Htab;
+        NNN={'Htab  hp',nnn(1,1)};
+        disp(NNN);
+        nomre=input('nomre zanjir az jadval 17-20 ba estefade az Htab va sorat   =');
+        Htab=input('Htab jadid az jadval 17-20 ba estefade az sorat va Htab ghadim   =');
+        roghan=input('no roghan kari A=1_B=2_C=3_Cprim=4   az jadval 17-20 =');
+        p=input('gam zanjir inch az jadval 17-19 ba estefade az nomre zanjir  =');
+        L=2*C+(p*(N1+N2))/2+(p^2*(N2-N1)^2)/(4*pi^2*C);
+        Ha=K1*K2*Htab;
+        Hd=Hnominal*Ks*nd;
+        nn(1,1)=L;
+        nn(1,2)=p;
+        nn(1,3)=roghan;
+        nn(1,4)=Ha;
+        nn(1,5)=Hd;
+        NN={'L inch',nn(1,1);'p inch',nn(1,2);'roghan 1=A 2=B 3=C 4=Cprim',nn(1,3);'Ha  hp',nn(1,4);'Hd   hp',nn(1,5)};
+        disp(NN);
+        disp('baraye tarahi bayad Ha>Hd');
+    end
+end
+-------------------------------------------------------------------------------------------------------------
+clc;
+clear all
+problem=input('tahlil=1_tarahi=2');
+Sy=input('Sy khar MPA');
+p=input('tavan KW');
+n=input('sorat rpm');
+d=input('ghotr shaft mm');
+a=input('arze mostatil mm');
+T=(p*10^3)/((n*2*pi)/60);
+F=T/((d*10^(-3))/2);
+if problem==2
+    nn=input('zarib etminan khar');
+    l=(2*nn*F)/(a*10^(3)*Sy);
+    N={'omghe L  m',l};
+    disp(N);
+else
+    l=input('omghe L  mm');
+    nn=(a*Sy*l)/(2*F);
+    N={'n',nn};
+    disp(N);
+end
