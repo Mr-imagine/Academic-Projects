@@ -1,0 +1,300 @@
+' Matlab codes for designing Spur / Helical Gears in Metric systems   line 2 - 300 '
+clc;
+clear all;
+spur=input('if spur enter 1 if helical enter 2  ');
+m=input('perpendicular module  ');
+b=input('facewidth_mm ');
+phi=input('perpendicular pressure angle ');
+H=input('Power_KW ');
+n=input('pinion velocity_rpm ');
+R=input('reliability(e.g.= 0.5) ');
+noP=input('zaribPoassonPINION ');
+noG=input('zaribPoassonGEAR ');
+EP=input('module_elacticity_PINION_MPA');
+EG=input('module_elacticity_GEAR_MPA');
+N=input('tedad cycle');
+GradeP=input('PinionGrade');
+GradeG=input('GearGrade');
+GradePP=input('fooladSakhtKari=1_FooladSakhtKariNitridi=2_Nitralavi=3_chrome=4_Pinion');
+GradeGG=input('fooladSakhtKari=1_FooladSakhtKariNitridi=2_Nitralavi=3_chrome=4_Gear');
+SS=input('S1/S agar markaz bud=0');
+EEE=input('tanzime_GeardarHengamNasb_seyghal=1_dargheyreSurat=2');
+mgg=input('gearBaz=1_gearTEjari=2_gearDaghigh=3_GearkheiliDaghigh=4');
+NP=input('tedaddandanePINION');
+NG=input('tedaddandaneGEAR');
+Q=input('keyfiat');
+Kmcc=input('crowned=1_uncrowned=2');
+over1=input('vorodi_uniform=1_lightshock=2_mediumshock=3');
+over2=input('khoroji_uniform=1_moderateshock=2_heavyshock=3');
+HBP=input('brinelPinion');
+HBG=input('brinelGear');
+ZR=input('hamun Cf ke mamuln=1');
+Yteta=input('bara dama ke mamuln=1');
+KBB=input('agar information az KB nadarim=1 dar gheyre insurat=2');
+YNNP=input('YN Pinion__100HB=1_250HB=2_400HB=3_NItridi=4_carbondahipooste=5_bish az 10^7=6');
+YNNG=input('YN gear__100HB=1_250HB=2_400HB=3_NItridi=4_carbondahipooste=5_bish az 10^7=6');
+II=input('charkhdande dakheli=1_charekhdandekhareji=2');
+mN=1;
+if spur==2
+    modP=input('modifying factor PINION');
+    JprimP=input('J prim PINION');
+    modG=input('modifying factor GEAR');
+    JprimG=input('J prim GEAR');
+    JnewP=JprimP*modP;
+    zegond=JnewP;
+    YJP=zegond;
+    JnewG=JprimG*modG;
+    zegond2=JnewG;
+    YJG=zegond2;
+    gamma1=(pi*m*cosd(phi));
+    a=m;
+    sigh=input('zavie helix');
+    mt=m/cosd(sigh);
+    alpha=mt;
+    m=alpha;
+    phit=atand((tand(phi)/cosd(sigh)));
+    beta=phit;
+    phi=beta;
+else
+    YJP=input('J pinion');
+    YJG=input('J GEAR');
+end
+mG=NG/NP;
+dP=m*NP;
+dG=m*NG;
+if spur==2
+    rP=(dP)/2;
+    rG=dG/2;
+    rbP=rP*cosd(phi);
+    rbG=rG*cosd(phi);
+    Z=((rP+a)^2-rbP^2)^0.5+((rG+a)^2-rbG^2)^0.5-((rP+rG)*sind(phi));
+    mNt=(gamma1)/(0.95*Z);
+    gamma=mNt;
+    mN=gamma;
+end
+    
+V=(pi*n*dP)/60000;
+Wt=(1000*H)/V;
+B=0.25*(12-Q)^(2/3);
+A=50+56*(1-B);
+Kv=((A+sqrt(200*V))/A)^B;
+Ze=sqrt(1/(pi*(((1-noP^2)/EP)+((1-noG^2)/EG))));
+if over1==1&&over2==1
+    ko=1;
+elseif over1==1&&over2==2
+    ko=1.25;
+elseif over1==1&&over2==3
+    ko=1.75;
+elseif over1==2&&over2==1
+    ko=1.25;
+elseif over1==2&&over2==2
+    ko=1.5;
+elseif over1==2&&over2==3
+    ko=2;
+elseif over1==3&&over2==1
+    ko=1.5;
+elseif over1==3&&over2==2
+    ko=1.75;
+elseif over1==3&&over2==3
+    ko=2.25;
+end
+if (0.5<R)&&(R<0.99)
+    Yz=0.658-0.0759*log(1-R);
+else ;Yz=0.5-0.109*log(1-R);
+end
+if Kmcc==1
+    Kmc=0.8;
+else
+    Kmc=1;
+end
+LL=b/(10*dP);
+if LL<0.05
+    OOO=0.05;
+    LL=OOO;
+end
+if b<=25
+    Kpf=LL-0.025;
+elseif (25<b)&&(b<=425)
+    Kpf=LL-0.0375+((4.92*(10^(-4))*b));
+elseif (425<b)&&(b<=1000)
+    Kpf=LL-0.1109+((8.15*(10^(-4))*b))-((3.53*(10^(-7))*b^2));
+end
+if SS<0.175
+   Kpm=1;
+else
+   Kpm=1.1;
+end
+if EEE==1
+    Ke=0.8;
+else
+    Ke=1;
+end
+if mgg==1
+    AA=0.247;
+    BB=0.657*10^(-3);
+    CC=-1.186*10^(-7);
+elseif mgg==2
+    AA=0.127;
+    BB=0.622*10^(-3);
+    CC=-1.69*10^(-7);  
+elseif mgg==3
+    AA=0.0675;
+    BB=0.504*10^(-3);
+    CC=-1.44*10^(-7); 
+else
+    AA=0.038;
+    BB=0.402*10^(-3);
+    CC=-1.27*10^(-7);   
+end
+Kma=AA+(BB*b)+(CC*b^2);
+Kh=1+(Kmc*((Kpf*Kpm)+(Kma*Ke)));
+HHH=HBP/HBG;
+if (1.2<=HHH)&&(HHH<=1.7)
+    AAA=0.00898*HHH-0.00829;
+elseif HHH<1.2
+    AAA=0;
+else 
+    AAA=0.00698;
+end
+Zw=1+(AAA*(mG-1));
+if GradeP==1
+    if GradePP==1
+        StP=0.533*HBP+88.3;
+    elseif GradePP==2
+        StP=0.568*HBP+83.8;
+    elseif GradePP==3
+        StP=0.594*HBP+87.76;
+    else
+        StP=0.7255*HBP+63.89;
+    end
+elseif GradePP==2
+        if GradePP==1
+        StP=0.703*HBP+113;
+    elseif GradePP==2
+        StP=0.749*HBP+110;
+    elseif GradePP==3
+        StP=0.784*HBP+114.81;
+    else
+        StP=0.7255*HBP+153.63;
+        end
+else 
+    StP=0.7255*HBP+201.91;
+end
+if GradeG==1
+    if GradeGG==1
+        StG=0.533*HBG+88.3;
+    elseif GradeGG==2
+        StG=0.568*HBG+83.8;
+    elseif GradeGG==3
+        StG=0.594*HBG+87.76;
+    else
+        StG=0.7255*HBG+63.89;
+    end
+elseif GradeG==2
+        if GradeGG==1
+        StG=0.703*HBG+113;
+    elseif GradeGG==2
+        StG=0.749*HBG+110;
+    elseif GradeGG==3
+        StG=0.784*HBG+114.81;
+    else
+        StG=0.7255*HBG+153.63;
+        end
+else 
+    StG=0.7255*HBG+201.91;
+end
+if  GradePP==1
+    if GradeP==1
+    ScP=2.22*HBP+200;
+    else
+    ScP=2.41*HBP+237;   
+    end
+end
+if  GradeGG==1
+    if GradeG==1
+    ScG=2.22*HBG+200;
+    else
+    ScG=2.41*HBG+237;   
+    end
+end
+if KBB==1
+    KB=1;
+else
+    tr=input('zekhamat toghe zire dandane');
+    ht=input('Ertefa Dandane');
+    mB=tr/ht;
+    if mB<1.2
+        KB=1.6*log(2.242/mB);
+    else 
+        KB=1;
+    end
+end
+YP=- 0.000003993044771*NP^2 + 0.002011312457*NP + 0.2823199044;
+YG=- 0.000003993044771*NG^2 + 0.002011312457*NG + 0.2823199044;
+KsP=0.8433*(b*m*sqrt(YP))^0.0535;
+KsG=0.8433*(b*m*sqrt(YG))^0.0535;
+if YNNP==1
+    YNP=2.3194*N^(-0.0538);
+    ZNP=2.466*(N)^(-0.056);
+elseif YNNP==2
+    YNP=4.9404*N^(-0.1045);
+    ZNP=2.466*(N)^(-0.056);
+elseif YNNP==3
+    YNP=9.4518*N^(-0.148);
+    ZNP=2.466*(N)^(-0.056);
+elseif YNNP==4
+    YNP=3.517*N^(-0.0817);
+    ZNP=1.249*(N)^(-0.0138);
+elseif YNNP==5
+    YNP=6.1514*N^(-0.1192);
+    ZNP=2.466*(N)^(-0.056);
+else
+    YNNNP=input('bara PINION agar zaribe kamtar mikhay=2_agar bishtar mikhay=1');
+    if YNNNP==1
+        YNP=1.3558*N^(-0.0178);
+        ZNP=1.4488*(N)^(-0.023);
+    else
+        YNP=1.6831*N^(-0.0323);
+        ZNP=2.466*(N)^(-0.056);
+    end
+end
+if YNNG==1
+    YNG=2.3194*(N/mG)^(-0.0538);
+    ZNG=2.466*(N/mG)^(-0.056);
+elseif YNNP==2
+    YNG=4.9404*(N/mG)^(-0.1045);
+    ZNG=2.466*(N/mG)^(-0.056);
+elseif YNNP==3
+    YNG=9.4518*(N/mG)^(-0.148);
+    ZNG=2.466*(N/mG)^(-0.056);
+elseif YNNP==4
+    YNG=3.517*(N/mG)^(-0.0817);
+    ZNG=1.249*(N/mG)^(-0.0138);
+elseif YNNP==5
+    YNG=6.1514*(N/mG)^(-0.1192);
+    ZNG=2.466*(N/mG)^(-0.056);
+else
+    YNNNG=input('bra GEAR agar zaribe kamtar mikhay=2_agar bishtar mikhay=1');
+    if YNNNG==1
+        YNG=1.3558*(N/mG)^(-0.0178);
+        ZNG=1.4488*(N/mG)^(-0.023);
+    else
+        YNG=1.6831*(N/mG)^(-0.0323);
+        ZNG=2.466*(N/mG)^(-0.056);
+    end
+end
+if II==1
+    ZI=(cosd(phi)*sind(phi)*mG)/((2*mN*(mG-1)));
+else
+    ZI=(cosd(phi)*sind(phi)*mG)/((2*mN*(mG+1)));
+end
+sigmaP=(Wt*ko*Kv*KsP*Kh*KB)/(m*b*YJP);
+sigmaG=(Wt*ko*Kv*KsG*Kh*KB)/(m*b*YJG);
+sFP=(((StP*YNP)/(Yteta*Yz))/sigmaP)-0.15;
+sFG=(((StG*YNG)/(Yteta*Yz))/sigmaG)-0.15;
+sigmaCP=Ze*sqrt((Wt*ko*Kv*KsP*Kh*ZR)/(dP*b*ZI));
+sigmaCG=Ze*sqrt((Wt*ko*Kv*KsG*Kh*ZR)/(dP*b*ZI));
+sHP=(((ScP*ZNP*Zw)/(Yteta*Yz))/sigmaCP)-0.1;
+sHG=(((ScG*ZNG*Zw)/(Yteta*Yz))/sigmaCG)-0.1;
+F={'sFP',sFP;'sFG',sFG;'sHP',sHP;'sHG',sHG;'sigmaP',sigmaP;'sigmaG',sigmaG;'sigmaCP',sigmaCP;'sigmaCG',sigmaCG;'Wt',Wt;'KO',ko;'Kv',Kv;'KsP',KsP;'KsG',KsG;'KH',Kh;'ZR',ZR;'ZI',ZI;'KB',KB;'YJP',YJP;'YJG',YJG;'StP',StP;'StG',StG;'ScP',ScP;'ScG',ScG;'Zw',Zw;'Yz',Yz;'Yteta',Yteta;'YNP',YNP;'YNG',YNG;'ZNP',ZNP;'ZNG',ZNG};
+disp(F);
