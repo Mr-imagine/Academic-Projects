@@ -1,0 +1,147 @@
+'MATLAB codes for Finite difference model (FTCS algorithm) regarding a Quet Flow -----> line 4 - 45       '
+'MATLAB codes for Finite Volume model (implicit algorithm) regarding a Quet Flow -----> line 47 - 147     '
+---------------------------------------------------------------------------------------------------------------
+clc;
+clear all
+ro=input('chegali=');
+miu=input('viscouzite=');
+U=input('sorate safhe takht U_m/s=');
+G=input('constant G=');
+nx=input('tedad gere=');
+nt=input('tedad paresh zaman=');
+L=input('fasele 2 divar=');
+tf=input('t final=');
+% halle FTCS %
+deltaX=(L)/(nx-1);
+deltaT=(tf)/(nt-1);
+r=(miu*deltaT)/(ro*deltaX^2);
+for i=1:1:nt+1
+   for j=1:1:nx-1
+       u(j+1,1)=0;
+       u(1,i)=U;
+       u(nx,i)=0;
+   end
+end
+for ii=2:1:nt+1
+    for jj=2:1:nx-1
+        u(jj,ii)=r*u(jj+1,ii-1)+((1-2*r)*u(jj,ii-1))+(r*u(jj-1,ii-1))+(G*deltaT)/ro;
+    end
+end
+disp(u);
+% be dast avardan e makane gere ha %
+m=deltaX;
+y(1,1)=0;
+y(nx,1)=0.001;
+for fff=2:1:nx-1
+       y(fff,1)=m;
+       m=m+deltaX;
+end
+% rasm profile%
+plot(u(:,1),y(:,1));
+hold on
+for hh=2:1:nt+1
+plot(u(:,hh),y(:,1));
+end
+hold off
+---------------------------------------------------------------------------------------------------------------
+clc;
+clear all
+ro=input('chegali=');
+miu=input('viscouzite=');
+U=input('sorate safhe takht U_m/s=');
+GG=input('constant G=');
+nx=input('tedad gere=');
+deltaT=0.01;
+h=input('fasele 2 divar=');
+tfinal=input('t final');
+N=1;
+% hajm mahdud zemni %
+deltaY=h/nx;
+aE=miu/deltaY;
+aW=miu/deltaY;
+aP0=(ro*deltaY)/deltaT;
+aP=aW+aE+aP0;
+% ijade matrice 3 ghotri %
+for iii=1:1:nx
+    for jjj=1:1:nx
+        if jjj==iii+1
+            uu(iii,jjj)=-aE;
+        elseif jjj>iii+1
+            uu(iii,jjj)=0;
+        elseif iii==jjj+1
+            uu(iii,jjj)=-aW;
+        elseif iii>jjj+1
+            uu(iii,jjj)=0;
+        elseif (iii==jjj)&&(iii>1)&&(iii<nx)&&(jjj>1)&&(jjj<nx)
+            uu(iii,jjj)=aP;
+        elseif (iii==jjj)&&(jjj==1)
+            uu(iii,jjj)=2*aW+aE+aP0;
+        else
+            uu(iii,jjj)=2*aE+aW+aP0;
+        end
+    end
+end
+% ---------------%
+% shrayete avalie %
+for B=1:1:nx
+    V(B,1)=0;
+end
+%-----------------%
+% be dast avardane makane gere ha %
+m=deltaY;
+y(1,1)=deltaY/2;
+y(nx,1)=0.001-deltaY/2;
+for fff=2:1:nx-1
+       y(fff,1)=deltaY/2+m;
+       m=m+deltaY;
+end
+% bedast avardane matrice savabet %
+for M=1:1:((tfinal)/deltaT)+1
+ uuu(1,1)=deltaY*GG+(aP0*V(1,1))+(2*aW*U);
+ uuu(nx,1)=deltaY*GG+(aP0*V(nx,1));
+for Q=2:1:nx-1
+    uuu(Q,1)=deltaY*GG+(aP0*V(Q,1));
+end   
+% ----------------%
+% guess seidel %
+n=nx;
+for ii=2:1:(n)
+    T(ii,1)=0.2;
+end
+A=uu;
+C=uuu;
+for G=1:1:500
+for i=1:1:n 
+    J=i+1;
+    K=i-1;
+    L=0;
+    LL=0;
+    SS=0;
+    KK=0;
+for JJ=J:1:(n)
+    s(1,SS+1)=((A(i,JJ)*T(JJ,1))/(A(i,i)));
+    L=L-s(1,SS+1);
+    SS=SS+1;
+end
+if  (K>0)
+for JJJ=K:-1:1
+    S(1,KK+1)=((A(i,JJJ)*T(JJJ,1))/(A(i,i)));
+    LL=LL-S(1,KK+1);
+    KK=KK+1;
+end
+end
+    T(i,1)=C(i,1)/(A(i,i))+LL+L;
+end
+end
+V=T;
+for xxx=1:1:nx
+    X(xxx,N)=V(xxx,1);
+end
+N=N+1;
+% ------------------------------- %
+% rasm profile %
+plot(V(:,1),y(:,1));
+hold on
+end
+disp(X);
+hold off
