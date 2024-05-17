@@ -18,28 +18,28 @@ noP=input('poisson's ratio_PINION  ');
 noG=input('poisson's ratio_GEAR ');
 EP=input('modulus of elacticity E _PINION_MPA  ');
 EG=input('modulus of elacticity E _GEAR_MPA  ');
-N=input('Number of Stress Cycles ');
+N=input('Number of Stress Cycles(N) ');
 GradeP=input('Pinion's Grade ');
 GradeG=input('Gear's Grade ');
 GradePP=input('Metallurgical procedure of PINION---> through-hardened steels=enter 1 | nitrided through-hardened steel=enter 2 | Nitraloy=enter 3 | chrome 2.5% =enter 4  ');
 GradeGG=input('Metallurgical procedure of GEAR---> through-hardened steels=enter 1 | nitrided through-hardened steel=enter 2 | Nitraloy=enter 3 | chrome 2.5% =enter 4  ');
 SS=input('S1/S (S1 =the distance between centerline of gear face and the midpoint of linked shaft   S= distance between the center line of bearings linked to the shaft)  if S1/S=1 then Enter 0  ');
 EEE=input('for gearing adjusted at assembly, or compatibility is improved by lapping, or both=enter 1  _  All other conditions= enter 2  ');
-mgg=input('gearBaz=1_gearTEjari=2_gearDaghigh=3_GearkheiliDaghigh=4');
-NP=input('tedaddandanePINION');
-NG=input('tedaddandaneGEAR');
-Q=input('keyfiat');
-Kmcc=input('crowned=1_uncrowned=2');
-over1=input('vorodi_uniform=1_lightshock=2_mediumshock=3');
-over2=input('khoroji_uniform=1_moderateshock=2_heavyshock=3');
-HBP=input('brinelPinion');
-HBG=input('brinelGear');
-ZR=input('hamun Cf ke mamuln=1');
-Yteta=input('bara dama ke mamuln=1');
-KBB=input('agar information az KB nadarim=1 dar gheyre insurat=2');
-YNNP=input('YN Pinion__100HB=1_250HB=2_400HB=3_NItridi=4_carbondahipooste=5_bish az 10^7=6');
-YNNG=input('YN gear__100HB=1_250HB=2_400HB=3_NItridi=4_carbondahipooste=5_bish az 10^7=6');
-II=input('charkhdande dakheli=1_charekhdandekhareji=2');
+mgg=input('Open gearing=enter 1  _ Commercial enclosed gear units=enter 2 _ Precision enclosed gear units= enter 3  _  Extra precision enclosed gear units= enter 4  ');
+NP=input('Number of teeth on pinion');
+NG=input('Number of teeth on Gear');
+Q=input('Quality Number  ');
+Kmcc=input('crowned teeth =enter 1   _  uncrowned teeth= enter 2  ');
+over1=input('power source---->uniform= eneter 1_ lightshock=enter 2_ mediumshock=enter 3  ');
+over2=input('power source---->uniform= eneter 1_ moderate shock=enter 2_ heavy hock=enter 3  ');
+HBP=input('brinel Hardness (HB) _ Pinion  ');
+HBG=input('brinel Hardness (HB) _ Gear  ');
+ZR=input('surface condition factor( Cf ) which is usually 1  ');
+Yteta=input('Temperature Factor(Y teta) which is usually 1  ');
+KBB=input('Rim thickness Factor(KB)----> if you don't have any information about rim thickness below the tooth(tR) and the tooth height(ht)=enter 1 _ Otherwise=enter 2  ');
+YNNP=input('Stress cycle factor (YN) Pinion-----> 100 HB=enter 1  _  250HB=enter 2  _  400HB=enter 3  _  NItrided=enter 4  _  Casecarb.=enter 5  _  if N > 10^7 =enter 6  ');
+YNNG=input('Stress cycle factor (YN) Gear-----> 100 HB=enter 1  _  250HB=enter 2  _  400HB=enter 3  _  NItrided=enter 4  _  Casecarb.=enter 5  _  if N > 10^7 =enter 6  ');
+II=input('Internal Gears =enter 1  _  External Geras=enter 2  ');
 mN=1;
 if spur==2
     modP=input('modifying factor PINION');
@@ -62,8 +62,8 @@ if spur==2
     beta=phit;
     phi=beta;
 else
-    YJP=input('J pinion');
-    YJG=input('J GEAR');
+    YJP=input('J(Bending-Strength Geometry Factor)_pinion  ');
+    YJG=input('J(Bending-Strength Geometry Factor)_Gear  ');
 end
 mG=NG/NP;
 dP=m*NP;
@@ -226,8 +226,8 @@ end
 if KBB==1
     KB=1;
 else
-    tr=input('zekhamat toghe zire dandane');
-    ht=input('Ertefa Dandane');
+    tr=input('rim thickness below the tooth(tR)  ');
+    ht=input('tooth height(ht)  ');
     mB=tr/ht;
     if mB<1.2
         KB=1.6*log(2.242/mB);
@@ -255,7 +255,7 @@ elseif YNNP==5
     YNP=6.1514*N^(-0.1192);
     ZNP=2.466*(N)^(-0.056);
 else
-    YNNNP=input('bara PINION agar zaribe kamtar mikhay=2_agar bishtar mikhay=1');
+    YNNNP=input('If you want smaller YN for Pinion=enter 2 _ else =enter 1  ');
     if YNNNP==1
         YNP=1.3558*N^(-0.0178);
         ZNP=1.4488*(N)^(-0.023);
@@ -280,7 +280,7 @@ elseif YNNP==5
     YNG=6.1514*(N/mG)^(-0.1192);
     ZNG=2.466*(N/mG)^(-0.056);
 else
-    YNNNG=input('bra GEAR agar zaribe kamtar mikhay=2_agar bishtar mikhay=1');
+    YNNNG=input('If you want smaller YN for Gear=enter 2 _ else =enter 1  ');
     if YNNNG==1
         YNG=1.3558*(N/mG)^(-0.0178);
         ZNG=1.4488*(N/mG)^(-0.023);
