@@ -8,14 +8,14 @@
 clc;
 clear all;
 spur=input('if spur enter 1 if helical enter 2  ');
-m=input('perpendicular module  ');
+m=input('Normal module  ');
 b=input('facewidth_mm ');
-phi=input('perpendicular pressure angle ');
+phi=input('Normal pressure angle ');
 H=input('Power_KW ');
 n=input('pinion velocity_rpm ');
 R=input('reliability(e.g.= 0.5) ');
-noP=input('zaribPoassonPINION ');
-noG=input('zaribPoassonGEAR ');
+noP=input('poisson's ratio_PINION  ');
+noG=input('poisson's ratio_GEAR ');
 EP=input('module_elacticity_PINION_MPA');
 EG=input('module_elacticity_GEAR_MPA');
 N=input('tedad cycle');
