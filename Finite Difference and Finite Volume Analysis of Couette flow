@@ -103,7 +103,7 @@ for Q=2:1:nx-1
     uuu(Q,1)=deltaY*GG+(aP0*V(Q,1));
 end   
 % ----------------%
-% guess seidel %
+% gauss seidel %
 n=nx;
 for ii=2:1:(n)
     T(ii,1)=0.2;
