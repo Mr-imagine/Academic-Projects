@@ -10,7 +10,7 @@ G=input('constant G=  ');
 nx=input('number of nodes=  ');
 nt=input('number of time steps= ');
 L=input('The distance between the 2 walls=  ');
-tf=input('final time ( tf(s) e.g. you want to see the state until 16s =  ');
+tf=input('final time ( tf(s) e.g. you want to see the state until 16s ) =  ');
 % solving FTCS %
 deltaX=(L)/(nx-1);
 deltaT=(tf)/(nt-1);
@@ -46,22 +46,22 @@ hold off
 ---------------------------------------------------------------------------------------------------------------
 clc;
 clear all
-ro=input('chegali=');
-miu=input('viscouzite=');
-U=input('sorate safhe takht U_m/s=');
-GG=input('constant G=');
-nx=input('tedad gere=');
+ro=input('fluid density=  ');
+miu=input('fluid viscosity=  ');
+U=input('velocity of the wall in contact with the fluid U_ m/s=  ');
+GG=input('constant G=  ');
+nx=input('number of nodes=  ');
 deltaT=0.01;
-h=input('fasele 2 divar=');
-tfinal=input('t final');
+h=input('distance between the 2 walls=   ');
+tfinal=input('final time ( tf(s) e.g. you want to see the state until 16s) =  ');
 N=1;
-% hajm mahdud zemni %
+% implicit finite volume %
 deltaY=h/nx;
 aE=miu/deltaY;
 aW=miu/deltaY;
 aP0=(ro*deltaY)/deltaT;
 aP=aW+aE+aP0;
-% ijade matrice 3 ghotri %
+% creating a matrice 3 ghotri %
 for iii=1:1:nx
     for jjj=1:1:nx
         if jjj==iii+1
@@ -82,12 +82,12 @@ for iii=1:1:nx
     end
 end
 % ---------------%
-% shrayete avalie %
+% initial condition %
 for B=1:1:nx
     V(B,1)=0;
 end
 %-----------------%
-% be dast avardane makane gere ha %
+% determining the location of nodes %
 m=deltaY;
 y(1,1)=deltaY/2;
 y(nx,1)=0.001-deltaY/2;
@@ -95,7 +95,7 @@ for fff=2:1:nx-1
        y(fff,1)=deltaY/2+m;
        m=m+deltaY;
 end
-% bedast avardane matrice savabet %
+% determining the matrix of constants %
 for M=1:1:((tfinal)/deltaT)+1
  uuu(1,1)=deltaY*GG+(aP0*V(1,1))+(2*aW*U);
  uuu(nx,1)=deltaY*GG+(aP0*V(nx,1));
@@ -139,7 +139,7 @@ for xxx=1:1:nx
 end
 N=N+1;
 % ------------------------------- %
-% rasm profile %
+% plotting the profile %
 plot(V(:,1),y(:,1));
 hold on
 end
