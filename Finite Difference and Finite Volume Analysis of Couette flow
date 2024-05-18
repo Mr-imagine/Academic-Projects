@@ -3,9 +3,9 @@
 ---------------------------------------------------------------------------------------------------------------
 clc;
 clear all
-ro=input('chegali=');
-miu=input('viscouzite=');
-U=input('sorate safhe takht U_m/s=');
+ro=input('fluid density=  ');
+miu=input('fluid viscosity= ');
+U=input('velocity of the plate in contact with the fluid U_ m/s=  ');
 G=input('constant G=');
 nx=input('tedad gere=');
 nt=input('tedad paresh zaman=');
