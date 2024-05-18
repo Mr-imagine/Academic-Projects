@@ -5,13 +5,13 @@ clc;
 clear all
 ro=input('fluid density=  ');
 miu=input('fluid viscosity= ');
-U=input('velocity of the plate in contact with the fluid U_ m/s=  ');
-G=input('constant G=');
-nx=input('tedad gere=');
-nt=input('tedad paresh zaman=');
-L=input('fasele 2 divar=');
-tf=input('t final=');
-% halle FTCS %
+U=input('velocity of the wall in contact with the fluid U_ m/s=  ');
+G=input('constant G=  ');
+nx=input('number of nodes=  ');
+nt=input('number of time steps= ');
+L=input('The distance between the 2 walls=  ');
+tf=input('final time ( tf(s) e.g. you want to see the state until 16s =  ');
+% solving FTCS %
 deltaX=(L)/(nx-1);
 deltaT=(tf)/(nt-1);
 r=(miu*deltaT)/(ro*deltaX^2);
@@ -28,7 +28,7 @@ for ii=2:1:nt+1
     end
 end
 disp(u);
-% be dast avardan e makane gere ha %
+% determining the locations of nodes%
 m=deltaX;
 y(1,1)=0;
 y(nx,1)=0.001;
@@ -36,7 +36,7 @@ for fff=2:1:nx-1
        y(fff,1)=m;
        m=m+deltaX;
 end
-% rasm profile%
+% plotting the profile%
 plot(u(:,1),y(:,1));
 hold on
 for hh=2:1:nt+1
