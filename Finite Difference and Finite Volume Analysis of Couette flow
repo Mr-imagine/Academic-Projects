@@ -61,7 +61,7 @@ aE=miu/deltaY;
 aW=miu/deltaY;
 aP0=(ro*deltaY)/deltaT;
 aP=aW+aE+aP0;
-% creating a matrice 3 ghotri %
+% creating a tridiagonal matrix %
 for iii=1:1:nx
     for jjj=1:1:nx
         if jjj==iii+1
