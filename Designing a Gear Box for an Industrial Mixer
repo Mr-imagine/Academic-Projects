@@ -302,7 +302,7 @@ sigmaCP=Ze*sqrt((Wt*ko*Kv*KsP*Kh*ZR)/(dP*b*ZI));
 sigmaCG=Ze*sqrt((Wt*ko*Kv*KsG*Kh*ZR)/(dP*b*ZI));
 sHP=(((ScP*ZNP*Zw)/(Yteta*Yz))/sigmaCP)-0.1;
 sHG=(((ScG*ZNG*Zw)/(Yteta*Yz))/sigmaCG)-0.1;
-F={'sFP',sFP;'sFG',sFG;'sHP',sHP;'sHG',sHG;'sigmaP',sigmaP;'sigmaG',sigmaG;'sigmaCP',sigmaCP;'sigmaCG',sigmaCG;'Wt',Wt;'KO',ko;'Kv',Kv;'KsP',KsP;'KsG',KsG;'KH',Kh;'ZR',ZR;'ZI',ZI;'KB',KB;'YJP',YJP;'YJG',YJG;'StP',StP;'StG',StG;'ScP',ScP;'ScG',ScG;'Zw',Zw;'Yz',Yz;'Yteta',Yteta;'YNP',YNP;'YNG',YNG;'ZNP',ZNP;'ZNG',ZNG};
+F={'sFP(safety factor of pinion for bending)',sFP;'sFG(safety factor of gear for bending)',sFG;'sHP(safety factor of pinion for pitting)',sHP;'sHG(safety factor of gear for pitting)',sHG;'sigmaP',sigmaP;'sigmaG',sigmaG;'sigmaCP',sigmaCP;'sigmaCG',sigmaCG;'Wt',Wt;'KO',ko;'Kv',Kv;'KsP',KsP;'KsG',KsG;'KH',Kh;'ZR',ZR;'ZI',ZI;'KB',KB;'YJP',YJP;'YJG',YJG;'StP',StP;'StG',StG;'ScP',ScP;'ScG',ScG;'Zw',Zw;'Yz',Yz;'Yteta',Yteta;'YNP',YNP;'YNG',YNG;'ZNP',ZNP;'ZNG',ZNG};
 disp(F);
 -------------------------------------------------------------------------------------------------------------
 clc;
