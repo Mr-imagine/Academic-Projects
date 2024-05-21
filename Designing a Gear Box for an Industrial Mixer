@@ -308,8 +308,8 @@ disp(F);
 clc;
 clear all
 close all
-Sut=input('Sut_MPa   =');
-Sy=input('Sy_MPa   =');
+Sut=input('tensile strength Sut_MPa   =');
+Sy=input('yield strength Sy_MPa   =');
 charkhesh=input('shaft charkhan tu por=1_ tukhali ya gheyre charkhan=2   =');
 niru=input('bar tarkibi ya gheyre mehvari gheyre tarkibi=1_fght mehvari=2   =');
 K1=input('sangzade=1_MashinkariYaSardkeshide=2_Garmnavardide=3_Ahangari=4   =');
