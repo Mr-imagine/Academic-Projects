@@ -311,10 +311,10 @@ close all
 Sut=input('Ultimate tensile strength Sut_MPa   =');
 Sy=input('yield strength Sy_MPa   =');
 charkhesh=input('Rotating solid shaft=Enter 1 _ Nonrotating shaft or hollow shafts=enter 2   ');
-niru=input('bar tarkibi ya gheyre mehvari gheyre tarkibi=1_fght mehvari=2   =');
-K1=input('sangzade=1_MashinkariYaSardkeshide=2_Garmnavardide=3_Ahangari=4   =');
-K2=input('khamesh=1_mehvar=2_pichesh=3_tarkib=4');
-K3=input('etemadpaziri be sadom');
+niru=input('combined forces or bending forces only or torsional forces only=enter 1  _  axial forces only =enter 2   ');
+K1=input('Surface finishing method of shaft-----> Ground=enter 1 _ Machined or cold drawn=enter 2 _ Hot rolled=enter 3 _ AS forged=enter 4   ');
+K2=input('bending=enter 1 _  axial=enter 2 _ torsional=enter 3 _ combined=enter 4');
+K3=input('Reliability (e.g. 0.5)'  );
 dama=input('agar damaye kari mohit bud=1_ dargheyre in surat dama ra vared konid C');
 Kf=input('Kf avamele motefareghe ra vared konid ke mamulan yeke');
 model=input('Tahlil=1_Tarahi=2    =');
