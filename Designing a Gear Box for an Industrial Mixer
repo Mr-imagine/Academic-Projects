@@ -381,7 +381,7 @@ else
         Kc=1;
 end
 if model==1
-    d=input('diameter mm');
+    d=input('enter diameter mm  ');
     if niru==2
         Kb=1;
     else
@@ -482,7 +482,7 @@ else
     HHH={'d  meter',dd};
     disp(HHH);
 end
-NN={'n khastegi',n(1,1);'n estatic',n(1,2)};
+NN={'fatigue safety factor nf= ',n(1,1);'static safety factor ns= ',n(1,2)};
 disp(NN);
 -------------------------------------------------------------------------------------------------------------
 clc;
