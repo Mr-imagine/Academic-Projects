@@ -1084,22 +1084,22 @@ end
 -------------------------------------------------------------------------------------------------------------
 clc;
 clear all
-problem=input('tahlil=1_tarahi=2');
-Sy=input('Sy khar MPA');
-p=input('tavan KW');
-n=input('sorat rpm');
-d=input('ghotr shaft mm');
-a=input('arze mostatil mm');
+problem=input('if you want to analyze=enter 1 _ if you want to design=enter 2 ');
+Sy=input('yield strength of key _ MPA =  ');
+p=input('transmitted power KW=  ');
+n=input('velocity rpm =  ');
+d=input('diameter of the linked shaft mm =  ');
+a=input('width of key mm =  ');
 T=(p*10^3)/((n*2*pi)/60);
 F=T/((d*10^(-3))/2);
 if problem==2
-    nn=input('zarib etminan khar');
+    nn=input('safety factor of key=  ');
     l=(2*nn*F)/(a*10^(3)*Sy);
-    N={'omghe L  m',l};
+    N={'height of key (meters)= ',l};
     disp(N);
 else
-    l=input('omghe L  mm');
+    l=input('height of key mm=  ');
     nn=(a*Sy*l)/(2*F);
-    N={'n',nn};
+    N={'safety factor n= ',nn};
     disp(N);
 end
