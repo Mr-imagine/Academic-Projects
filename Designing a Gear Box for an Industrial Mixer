@@ -318,12 +318,12 @@ K3=input('Reliability (e.g. 0.5)'  );
 dama=input('if the operating temperature is ambient=enter 1 _ otherwise enter the operating temperature (Celsius)  ');
 Kf=input('Miscellaneous Factor Kf (usually 1)  ');
 model=input('if you want to analyze a shaft with a known diameter=enter 1_ if you want to design a shaft=enter 2    ');
-Fa=input('Fa---> amplitude of axial force _ Newton   ');
-Fm=input('Fm---> axial force _ Newton   ');
-Ta=input('Ta---> amplitude of torsional force _ Newton   ');
-Tm=input('Tm Nioton');
-Ma=input('Ma gashtavarae amplitude N.m');
-Mm=input('Mm be N.m');
+Fa=input('Fa---> amplitude of axial force(|(Fmax-Fmin)|/2) _ Newton   ');
+Fm=input('Fm---> midrange axial force((Fmax+Fmin)/2) _ Newton   ');
+Ta=input('Ta---> amplitude of torque(|(Tmax-Tmin)|/2) _ N.m  ');
+Tm=input('Tm---> midrange of torque((Tmax+Tmin)/2) _ N.m  ');
+Ma=input('Ma---> amplitude of moment(|(M max-M min)|/2) _ N.m  ');
+Mm=input('Mm---> midrange of moment((M max+M min)/2) _ N.m  ');
 if dama==1
     Kd=1;
 else
