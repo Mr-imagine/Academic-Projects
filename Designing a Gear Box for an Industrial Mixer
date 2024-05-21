@@ -31,7 +31,7 @@ NG=input('Number of teeth on Gear');
 Q=input('Quality Number  ');
 Kmcc=input('crowned teeth =enter 1   _  uncrowned teeth= enter 2  ');
 over1=input('power source---->uniform= eneter 1_ lightshock=enter 2_ mediumshock=enter 3  ');
-over2=input('power source---->uniform= eneter 1_ moderate shock=enter 2_ heavy hock=enter 3  ');
+over2=input('driven components---->uniform= eneter 1_ moderate shock=enter 2_ heavy hock=enter 3  ');
 HBP=input('brinel Hardness (HB) _ Pinion  ');
 HBG=input('brinel Hardness (HB) _ Gear  ');
 ZR=input('surface condition factor( Cf ) which is usually 1  ');
