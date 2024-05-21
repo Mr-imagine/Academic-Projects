@@ -400,12 +400,12 @@ if model==1
             end
         end
     end
-    KtA=input('tamarkoz taneshe mehvari');
-    Ktb=input('tamarkoz taneshe khameshi');
-    Kts=input('tamarkoz taneshe picheshi');
-    rr=input('agar andaze fillet ra darim =1 dar gheyre in surat =2');
+    KtA=input('Axial stress concentration factor kta');
+    Ktb=input('bending stress concentration factor kt');
+    Kts=input('torsional stress concentration factor kts);
+    rr=input('if you have the fillet radius(for stress concentration)=enter 1 _ otherwise =enter 2  ');
     if rr==1
-    r=input('fillet radius mm');
+    r=input('fillet radius mm=  ');
     Kfb=1+((Ktb-1)/(1+(aa/sqrt(r))));
     KfA=1+((KtA-1)/(1+(aa/sqrt(r))));
     Kfs=1+((Kts-1)/(1+(aas/sqrt(r))));
@@ -418,8 +418,8 @@ if model==1
     n(1,1)=1/((((((32*Kfb*Ma)/(pi*(d*10^(-3))^3)+(4*KfA*Fa)/(0.85*pi*(d*10^(-3))^2))^2+3*((16*Kfs*Ta)/(pi*(d*10^(-3))^3))^2)^0.5)/(Se*10^6))+(((((32*Kfb*Mm)/(pi*(d*10^(-3))^3)+(4*KfA*Fm)/(pi*(d*10^(-3))^2))^2+3*((16*Kfs*Tm)/(pi*(d*10^(-3))^3))^2)^0.5)/(Sut*10^6)));
     n(1,2)=(Sy*10^6)/((((32*Kfb*(Mm+Ma))/(pi*(d*10^(-3))^3)+(((4*KfA*(Fa/0.85+Fm))/(pi*(d*10^(-3))^2))))^2+(3*((16*Kfs*(Tm+Ta))/(pi*(d*10^(-3))^3))^2))^0.5);
 else
-    KK=input('gorde tiz r/d=0.02=1_ gorde gerd r/d=0.1 =2_ jakhar ferez angoshti r/d=0.02 =3_ jakhar KafGerd=4_shiar khar fanari=5_ bedune tamarkoz tanesh=6   =');
-    n(1,1)=input('zaribe etminane khastegi');
+    KK=input('stress concentration  type ---->  shoulder fillet sharp (r/d=0.02) =enter 1 _ shoulder fillet well rounded (r/d=0.1) =enter 2 _ end mill keyseat (r/d=0.02) =enter 3 _ sled runner keyseat=enter 4 _ retaining ring groove=enter 5 _ without stress concentration=enter 6   ');
+    n(1,1)=input('enter fatigue safety factor  ');
     Kb=0.85;
     if KK==1
         KtA=3;
@@ -479,7 +479,7 @@ else
          end
     end
     n(1,2)=(Sy*10^6)/((((32*Kfb*(Mm+Ma))/(pi*(dd)^3)+(((4*KfA*(Fa/0.85+Fm))/(pi*(dd)^2))))^2+(3*((16*Kfs*(Tm+Ta))/(pi*(dd)^3))^2))^0.5);
-    HHH={'d  meter',dd};
+    HHH={'d  meter=',dd};
     disp(HHH);
 end
 NN={'fatigue safety factor nf= ',n(1,1);'static safety factor ns= ',n(1,2)};
