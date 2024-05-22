@@ -978,16 +978,16 @@ elseif problem==2
     %----------------%
     % --------Roller chain-----------%
 else
-    no1=input('tahlil=1_tarahi=2  =');
+    no1=input('if you want to analyze=enter 1 _ if you want to design=enter 2  ');
     if no1==1
-        no=input('nomre zanjir  =');
-        tedad=input('tedad reshte 1=1  2=2 3=3 4=4 5=5 6=6 8=8   = ');
-        n=input('sorat charkh zanjir kuchike rpm  =');
-        nd=input('zarib etminan ke mamuln 1.5  =');
-        Hnominal=input('tavan hp  =');
-        N1=input('tedad dandane charkh zanir kuchak =');
-        N2=input('tedad dandane charkh zanir bozorg =');
-        which=input('L ro darim=1_C ro darim=2   =');
+        no=input('chain number  =  ');
+        tedad=input('number of strands 1=enter 1  2=enter 2 3=enter 3 4=enter 4 5=enter 5 6=enter 6 8=enter 8    ');
+        n=input('velocity of smaller sprocket rpm  =  ');
+        nd=input('design factor(usually 1.5)  = ');
+        Hnominal=input('power hp  = ');
+        N1=input('smaller sprocket tooth counts = ');
+        N2=input('larger sprocket tooth counts = ');
+        which=input('if you have the length of the chain L=enter 1_ if you have the center to center distance C =enter 2   ');
         if which==1
             L=input('toole halghe zanjir L inch   =');
             p=input('gam zanjir inch    =');
