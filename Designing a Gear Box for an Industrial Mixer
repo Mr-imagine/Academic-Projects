@@ -754,7 +754,7 @@ if problem==1
         nd=input('design factor (usually 1.1)   =  ');
         Hnominal=input('power hp   =  ');
         n=input('small pulley velocity rpm   =  ');
-        ratio=input('conversion ratio(large pulley diameter/small pulley duameter)   =  ');
+        ratio=input('conversion ratio(large pulley diameter/small pulley diameter)   =  ');
         d=input('guess small pulley diameter in   =  ');
         D=ratio*d;
         t=input('guess a belt from table 17-2 and enter its size(thickness) (in) Also check the minimum pulley diameter(for the smaller pulley) to see if it aligns with your guessed diameter   =  ');
@@ -856,11 +856,11 @@ elseif problem==2
         phi=tetad;
         nnn(1,1)=phi*180/pi;
         nnn(1,2)=V;
-        NNN={'peripheral speed of belt V ft/min= ',nnn(1,2);'contact angle of smaller pulley _ degree',nnn(1,1)};
+        NNN={'peripheral speed of belt V ft/min= ',nnn(1,2);'wrap angle of smaller pulley (teta d) _ degree=',nnn(1,1)};
         disp(NNN);
-        Htab=input('Htab hp az jadval 17-12 ba estefade az sorat va d  =');
-        K1=input('K1 az jadval 17-13 ba estefade az zavie  =');
-        K2=input('K2 az jadval 17-14 ba estefade az L  =');
+        Htab=input('find horsepower rating(Htab) _ hp from table 17-12 with the aid of belt speed V and the diameter of smaller pulley d  ');
+        K1=input('choose angle of contact correction factor K1 from table 17-13 with the aid of wrap angle   ');
+        K2=input('choose belt length correction factor K2 from table 17-14 with the aid of pitch length Lp  ');
         Ha=K1*K2*Htab;
         Hd=Hnominal*Ks*nd;
         Nb=ceil(Hd/Ha);
@@ -872,8 +872,8 @@ elseif problem==2
         nfs=(Ha*Nb)/(Hnominal*Ks);
         T1=F1+Kb/d;
         T2=F1+Kb/D;
-        K=input('K az jadval17-17 mamuln dar baze 10^8ta 10^9  =');
-        bb=input('b az jadval17-17 mamuln dar baze 10^8ta 10^9  =');
+        K=input('choose K from table 17-17 usually in the 10^8 to 10^9 force peaks category  ');
+        bb=input('choose b from table 17-17 usually in the 10^8 to 10^9 force peaks category  ');
         Np=((K/T1)^(-bb)+(K/T2)^(-bb))^(-1);
         if Np>10^9
             Np=10^9;
@@ -886,16 +886,16 @@ elseif problem==2
         nn(1,3)=Ha;
         nn(1,4)=Hd;
         nn(1,5)=Nb;
-        NN={'t hours',nn(1,1);'nfs',nn(1,2);'Ha   hp',nn(1,3);'Hd  hp',nn(1,4);'Nb',nn(1,5)};
+        NN={'lifetime of belt t hours',nn(1,1);'factor of safety nfs',nn(1,2);'allowable power per belt Ha  _ hp',nn(1,3);'design power Hd  hp',nn(1,4);'number of belts Nb',nn(1,5)};
         disp(NN);
     else
-        n=input('sorat pulley kuchike rpm  =');
-        Hnominal=input('tavan hp  =');
-        C=input('C in =');
-        ratio=input('nesbat tabdil(bozorg be kuchik)   =');
-        nd=input('zarib etminan ke mamuln 1.1 =');
-        no=input('noe tasme  hads bezan A=1_B=2_C=3_D=4_E=5  =');
-        d=input('small pulley diameter hadsi in va min eshi ba jadval 17-9 check kon  =');
+        n=input('velocity of the smaller pulley rpm  = ');
+        Hnominal=input('power hp  =  ');
+        C=input('center to center distance C _ in = ');
+        ratio=input('conversion ratio(large pulley diameter/small pulley diameter)   =  ');
+        nd=input('design factor (usually 1.1 )= ');
+        no=input('guess the section type of belt A=enter 1 _ B=enter 2 _ C=enter 3 _ D=enter 4 _ E=enter 5  ');
+        d=input('guess the small pulley diameter _ in _ also check it with the minimum sheave diameter from table 17-9  ');
         D=ratio*d;
         if no==1
             Lc=1.3;
@@ -931,20 +931,20 @@ elseif problem==2
         Lp=2*C+pi*(D+d)/2+((D-d)^2)/(4*C);
         L=Lp-Lc;
         nnn(1,1)=L;
-        NNN={'L in',nnn(1,1)};
+        NNN={'inside circumference L in',nnn(1,1)};
         disp(NNN);
-        L=input('nazdik tarin adad be L inch ba estefade az jadvale 17-10  =');
+        L=input('select the closest number to inside circumference  L inch from table 17-10  ');
         V=(pi*d*n)/12;
         tetad=pi-2*asin((D-d)/(2*C));
         tetaD=pi+2*asin((D-d)/(2*C));
         phi=tetad;
         nnnn(1,1)=phi*180/pi;
         nnnn(1,2)=V;
-        NNNN={'V ft/min',nnnn(1,2);'tetad  daraje',nnnn(1,1)};
+        NNNN={'peripheral speed of belt V ft/min= ',nnnn(1,2);'wrap angle of smaller pulley (teta d) _ degree=',nnnn(1,1)};
         disp(NNNN);
-        Htab=input('Htab hp az jadval 17-12 ba estefade az sorat va d  =');
-        K1=input('K1 az jadval 17-13 ba estefade az zavie  =');
-        K2=input('K2 az jadval 17-14 ba estefade az L  =');
+        Htab=input('find horsepower rating(Htab) _ hp from table 17-12 with the aid of belt speed V and the diameter of smaller pulley d  ');
+        K1=input('choose angle of contact correction factor K1 from table 17-13 with the aid of wrap angle   ');
+        K2=input('choose belt length correction factor K2 from table 17-14 with the aid of pitch length Lp  ');
         Ha=K1*K2*Htab;
         Hd=Hnominal*Ks*nd;
         Nb=ceil(Hd/Ha);
@@ -956,8 +956,8 @@ elseif problem==2
         nfs=(Ha*Nb)/(Hnominal*Ks);
         T1=F1+Kb/d;
         T2=F1+Kb/D;
-        K=input('K az jadval17-17 mamuln dar baze 10^8ta 10^9  =');
-        bb=input('b az jadval17-17 mamuln dar baze 10^8ta 10^9  =');
+        K=input('choose K from table 17-17 usually in the 10^8 to 10^9 force peaks category  ');
+        bb=input('choose b from table 17-17 usually in the 10^8 to 10^9 force peaks category  ');
         Np=((K/T1)^(-bb)+(K/T2)^(-bb))^(-1);
         if Np>10^9
             Np=10^9;
@@ -972,7 +972,7 @@ elseif problem==2
         nn(1,5)=Ha;
         nn(1,6)=Hd;
         nn(1,7)=Nb;
-        NN={'t hours',nn(1,1);'nfs',nn(1,2);'a tasme in',nn(1,3);'b tasme in',nn(1,4);'Ha  hp',nn(1,5);'Hd  hp',nn(1,6);'Nb',nn(1,7)};
+        NN={'lifetime of belt t hours=',nn(1,1);'safety of factor nfs=',nn(1,2);'width of belt  a _ in=',nn(1,3);'thickness of belt b _ in=',nn(1,4);'allowable power Ha _ hp=',nn(1,5);'design power Hd _ hp=',nn(1,6);'number of belts Nb=',nn(1,7)};
         disp(NN);
     end
     %----------------%
