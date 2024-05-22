@@ -2,7 +2,7 @@
 ' Matlab codes for designing Shafts in Metric systems  ------> line 308 - 486 '
 ' Matlab codes for designing Bearings   ------> line 488 - 677 '
 ' Matlab codes for designing Belts    ------> line 679 - 1083 '
-' Matlab codes for designing Rectangular keys    ------> line 1085 - 1105 '
+' Matlab codes for designing Square keys    ------> line 1085 - 1105 '
 
 -------------------------------------------------------------------------------------------------------------
 clc;
@@ -1089,16 +1089,16 @@ Sy=input('yield strength of key _ MPA =  ');
 p=input('transmitted power KW=  ');
 n=input('velocity rpm =  ');
 d=input('diameter of the linked shaft mm =  ');
-a=input('width of key mm =  ');
+a=input('the square's side of key mm =  ');
 T=(p*10^3)/((n*2*pi)/60);
 F=T/((d*10^(-3))/2);
 if problem==2
     nn=input('safety factor of key=  ');
     l=(2*nn*F)/(a*10^(3)*Sy);
-    N={'height of key (meters)= ',l};
+    N={'length of key (meters)= ',l};
     disp(N);
 else
-    l=input('height of key mm=  ');
+    l=input('length of key mm=  ');
     nn=(a*Sy*l)/(2*F);
     N={'safety factor n= ',nn};
     disp(N);
