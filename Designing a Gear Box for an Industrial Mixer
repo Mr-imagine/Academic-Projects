@@ -1,6 +1,6 @@
 ' Matlab codes for designing Spur / Helical Gears in Metric systems  ------> line 8 - 306 '
 ' Matlab codes for designing Shafts in Metric systems  ------> line 308 - 486 '
-' Matlab codes for designing Bearings   ------> line 488 - 677 '
+' Matlab codes for designing Bearings (SKF catalogue)   ------> line 488 - 677 '
 ' Matlab codes for designing Belts    ------> line 679 - 1083 '
 ' Matlab codes for designing Square keys    ------> line 1085 - 1105 '
 
@@ -487,21 +487,21 @@ disp(NN);
 -------------------------------------------------------------------------------------------------------------
 clc;
 clear all;
-Q=input('deep groove ball bearing=1_roller bearing=2');
-n=input('tedade dor shaft rpm');
-h=input('zamane karkarde yataghan hours');
-R=input('reliability be sadom');
-af=input('zarib ezafe bar ya hamun safety factor');
+Q=input('deep groove ball bearing=enter 1  _ roller bearing=enter 2  ');
+n=input('velocity of shaft rpm=  ');
+h=input('desired life _ hours=  ');
+R=input('reliability (e.g., 0.5)=  ');
+af=input('overload factor af ( safety factor )=  ');
 L=60*h*n;
 Xd=L/(1e6);
 if Q==2
     Fd=input('Fd be KN');
     C10=af*Fd*(Xd/(0.02+(4.439*(1-R)^(1/1.483))))^(3/10);
 else
-    E=input('halghe dakheli micharkhad=1_halghe khareji micharkhad=2');
-    Fr=input('Fr be KN');
-    Fa=input('Fa be KN');
-    C0=input('C0 guess kN');
+    E=input('if the inner ring rotates=enter 1 _ if the oute ring rotates= enter 2  ');
+    Fr=input('Radial load Fr _ KN=  ');
+    Fa=input('Axial thrust load Fa _ KN=   ');
+    C0=input('guessed basic static load rating (C0) _ kN=  ');
     %c10 ha be tartib SKF %
     C(1,1)=0.54;
     C(2,1)=0.624;
