@@ -713,7 +713,7 @@ if problem==1
     no1=input('if you want to analyze=enter 1 _ if you want to design=enter 2   ');
     no=input('Open Belt=enter 1 _ Cross belt=enter 2   ');
     if no1==1
-    C=input('center distance _ in  =  ');
+    C=input('center to center distance _ in  =  ');
     n=input('small pulley velocity rpm   =  ');
     Hnominal=input('Power hp  =  ');
     d=input('small pulley diameter in   =  ');
@@ -750,7 +750,7 @@ if problem==1
     disp(NN);
     disp(' fprim should be smaller than f (fprim<f)  ');
     else
-        C=input('center distance _ in =  ');
+        C=input('center to center distance _ in =  ');
         nd=input('design factor (usually 1.1)   =  ');
         Hnominal=input('power hp   =  ');
         n=input('small pulley velocity rpm   =  ');
@@ -801,11 +801,11 @@ if problem==1
     %-----------------%
     %----      V-Belts      ------%
 elseif problem==2
-    no1=input('tahlil=1_tarahi=2  =');
+    no1=input('if you want to analyze=enter 1 _ if you want to design=enter 2  ');
     if no1==1
-        no=input('noe tasme A=1_B=2_C=3_D=4_E=5  =');
-        n=input('sorat pulley kuchike rpm  =');
-        Hnominal=input('tavan hp  =');
+        no=input('Belt section type----> A=enter 1 _ B=enter 2 _ C=enter 3 _ D=enter 4_ E=enter 5  ');
+        n=input('velocity of the smaller pulley  rpm  =  ');
+        Hnominal=input('power hp  = ');
         if no==1
             Lc=1.3;
             Kb=220;
@@ -839,14 +839,14 @@ elseif problem==2
         end
         d=input('small pulley diameter in =');
         D=input('bigger pulley diameter in =');
-        nd=input('zarib etminan ke mamuln 1.1 =');
-        which=input('L ro darim=1_C ro darim=2  =');
+        nd=input('design factor (usually 1.1)   =  ');
+        which=input('if you have pitch length Lp=enter 1 _ if you have center to center distance C=enter 2  ');
         if which==1
-            L=input('L in  =');
+            L=input('enter pitch length Lp _ in  =  ');
             Lp=L+Lc;
             C=0.25*((Lp-(pi/2)*(D+d))+sqrt((Lp-(pi/2)*(D+d))^2-2*(D-d)^2));
         else
-            C=input('C in =');
+            C=input('enter center to center  distance C _ in =  ');
             Lp=2*C+pi*(D+d)/2+((D-d)^2)/(4*C);
             L=Lp-Lc;
         end
@@ -856,7 +856,7 @@ elseif problem==2
         phi=tetad;
         nnn(1,1)=phi*180/pi;
         nnn(1,2)=V;
-        NNN={'V ft/min',nnn(1,2);'tetad  daraje',nnn(1,1)};
+        NNN={'peripheral speed of belt V ft/min= ',nnn(1,2);'contact angle of smaller pulley _ degree',nnn(1,1)};
         disp(NNN);
         Htab=input('Htab hp az jadval 17-12 ba estefade az sorat va d  =');
         K1=input('K1 az jadval 17-13 ba estefade az zavie  =');
