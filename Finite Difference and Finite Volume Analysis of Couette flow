@@ -1,5 +1,5 @@
-'MATLAB codes for Finite difference model (FTCS algorithm) regarding a Quet Flow -----> line 4 - 45       '
-'MATLAB codes for Finite Volume model (implicit algorithm) regarding a Quet Flow -----> line 47 - 147     '
+'MATLAB codes for Finite difference model (FTCS algorithm) regarding a Couette Flow -----> line 4 - 45       '
+'MATLAB codes for Finite Volume model (implicit algorithm) regarding a Couette Flow -----> line 47 - 147     '
 ---------------------------------------------------------------------------------------------------------------
 clc;
 clear all
@@ -36,7 +36,7 @@ for fff=2:1:nx-1
        y(fff,1)=m;
        m=m+deltaX;
 end
-% plotting the profile%
+% plotting the profile for each time step%
 plot(u(:,1),y(:,1));
 hold on
 for hh=2:1:nt+1
@@ -139,7 +139,7 @@ for xxx=1:1:nx
 end
 N=N+1;
 % ------------------------------- %
-% plotting the profile %
+% plotting the profile in each time step %
 plot(V(:,1),y(:,1));
 hold on
 end
