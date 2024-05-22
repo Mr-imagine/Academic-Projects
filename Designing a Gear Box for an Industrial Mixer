@@ -54,7 +54,7 @@ if spur==2
     YJG=zegond2;
     gamma1=(pi*m*cosd(phi));
     a=m;
-    sigh=input('zavie helix');
+    sigh=input('helix angle');
     mt=m/cosd(sigh);
     alpha=mt;
     m=alpha;
