@@ -678,9 +678,9 @@ end
 -------------------------------------------------------------------------------------------------------------
 clc;
 clear all
-problem=input('Flatbelt=1_Vbelt=2_RollerChains=3   =');
-shock=input('bedune shock=1_light=2_medium=3_heavy=4   =');
-gashtavar=input('gashtavar addi=1_gashtavar bala=2   =');
+problem=input('Flatbelt=enter 1 _ Vbelt=enter 2 _ RollerChains=enter 3    ');
+shock=input('shock----> uniform=enter 1 _ light shock=enter 2 _ medium shock=enter 3 _ heavy shock=enter 4   ');
+gashtavar=input('Normal Torque=enter 1 _ high or nonuniform torque=enter 2   ');
 % overload %
 if shock==1
     if gashtavar==1
@@ -710,15 +710,15 @@ end
 %------%
 %--------- flat belt ----------%
 if problem==1
-    no1=input('tahlil=1_tarahi=2   =');
-    no=input('mamuli=1_zarbdari=2   =');
+    no1=input('if you want to analyze=enter 1 _ if you want to design=enter 2   ');
+    no=input('Open Belt=enter 1 _ Cross belt=enter 2   ');
     if no1==1
-    C=input('central distance_in   =');
-    n=input('small pulley velocity rpm   =');
-    Hnominal=input('tavan hp   =');
-    d=input('small pulley diameter in   =');
-    D=input('bigger pulley diameter in   =');
-    b=input('arze pulley in   =');
+    C=input('center distance _ in  =  ');
+    n=input('small pulley velocity rpm   =  ');
+    Hnominal=input('Power hp  =  ');
+    d=input('small pulley diameter in   =  ');
+    D=input('Large pulley diameter in   =  ');
+    b=input('Belt Width _ in  =  ');
     if no==1
         tetad=pi-2*asin((D-d)/(2*C));
         tetaD=pi+2*asin((D-d)/(2*C));
@@ -730,16 +730,16 @@ if problem==1
         phi=teta;
     end
     V=(pi*d*n)/12;
-    landa=input('vazne makhsus az jadval 17-2   =');
-    t=input('zekhamat tasme _jadval 17-2   =');
+    landa=input('Find Specific weight from Table 17-2   =  ');
+    t=input('Find Size(thickness) from Table 17-2   =  ');
     w=12*landa*b*t;
-    Fa=input('Fa az jadval 17-2   =');
-    f=input('estekak f az jadval 17-2   =');
+    Fa=input('Find allowable tension per unit width at 600 ft/min (Fa) from Table 17-2   =  ');
+    f=input('Find Coefficient of friction(f) from Table 17-2   =  ');
     Fc=(w/32.17)*(V/60)^2;
-    nd=input('zarib etminan ke mamuln 1.1   =');
+    nd=input('safety factor (usually 1.1)   =  ');
     T=(63025*Hnominal*Ks*nd)/n;
-    Cv=input('Cv  agar charmi bud shekle 17-9 dargheyre in surat =1   =');
-    Cp=input('Cp az jadval 17-4   =');
+    Cv=input('determine velocity correction factor Cv  from Fig 17-9 if the belt is leather _ otherwise enter 1   =  ');
+    Cp=input('find pulley correction factor Cp from Table 17-4   =  ');
     F1a=b*Fa*Cp*Cv;
     F2=F1a-((2*T)/d);
     Fi=(F1a+F2)/2-Fc;
@@ -748,7 +748,7 @@ if problem==1
     nn(1,2)=f;
     NN={'fprim',nn(1,1);'f',nn(1,2)};
     disp(NN);
-    disp('bayad fprim<f');
+    disp(' fprim should be smaller than f (fprim<f)  ');
     else
         C=input('central distance_in');
         nd=input('zarib etminan ke mamuln 1.1   =');
