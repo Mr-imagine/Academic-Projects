@@ -989,13 +989,13 @@ else
         N2=input('larger sprocket tooth counts = ');
         which=input('if you have the length of the chain L=enter 1_ if you have the center to center distance C =enter 2   ');
         if which==1
-            L=input('toole halghe zanjir L inch   =');
-            p=input('gam zanjir inch    =');
+            L=input('enter the length of the chain L inch =  ');
+            p=input('enter Chain pitch p inch    =  ');
             A=(N1+N2)/2-L/p;
             C=(p/4)*(-A+sqrt(A^2-8*((N2-N1)/(2*pi))^2));
         else
-            C=input('C inch  =');
-            p=input('gam zanjir inch    =');
+            C=input('enter the center to center distance C inch  =  ');
+            p=input('enter Chain pitch p inch    =  ');
             L=2*C+(p*(N1+N2))/2+(p^2*(N2-N1)^2)/(4*pi^2*C);
             A=(N1+N2)/2-L/p;
         end
@@ -1014,7 +1014,7 @@ else
         else
             K2=6;
         end
-        KKK=input('ghable extermum=1_ bade etermum=2    =');
+        KKK=input('pre extreme horsepower for K1 in table 17-22 =enter 1 _ post extreme horsepower for K1 in table 17-22 =enter 2    ');
         if KKK==1
             K1=(N1/17)^1.08;
         else
