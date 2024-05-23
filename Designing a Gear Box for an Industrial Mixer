@@ -1,8 +1,8 @@
-' Matlab codes for designing Spur / Helical Gears in Metric systems  ------> line 8 - 306 '
-' Matlab codes for designing Shafts in Metric systems  ------> line 308 - 486 '
+' Matlab codes for designing Spur / Helical Gears in Metric system  ------> line 8 - 306 '
+' Matlab codes for designing Shafts in Metric system  ------> line 308 - 486 '
 ' Matlab codes for designing Bearings (SKF catalogue)   ------> line 488 - 677 '
-' Matlab codes for designing Belts    ------> line 679 - 1083 '
-' Matlab codes for designing Square keys    ------> line 1085 - 1105 '
+' Matlab codes for designing Belts inch system    ------> line 679 - 1083 '
+' Matlab codes for designing Square keys metric system    ------> line 1085 - 1105 '
 
 -------------------------------------------------------------------------------------------------------------
 clc;
